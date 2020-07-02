@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: storagepod
+  name: storagepod
+  namespace: ashu   # name of namespace 
+spec:
+  nodeName: ip-172-31-78-11.ec2.internal   #  we are not using  kube-schedular here 
+  volumes:  #  for creating  volumes 
+  - name: ashuvol1   #  name of volume
+    emptyDir: {}   #  location will randomly decided by k8s  on the same worker node where pod will be schedule 
+  containers:
+  - image: alpine
+    name: storagepod
+    volumeMounts:
+    - name: ashuvol1  #  same volume we created above 
+      mountPath:  /mnt/cisco  #  here inside container volume will be mounted
+    command: ["/bin/sh","-c","while true; do date  >>/mnt/cisco/time.txt;sleep 5;done"]  # writing  data into volume 
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}

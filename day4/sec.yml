@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: securepod1
+  name: securepod1
+spec:
+  imagePullSecrets:
+  - name: anilimage1
+  containers:
+  - image: ashutoshh.azurecr.io/alpine:v1
+    name: securepod1
+    command: ["/bin/sh","-c","ping  fb.com"]
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}

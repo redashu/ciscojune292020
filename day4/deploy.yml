@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: anildep1
+  name: anildep1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: anildep1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: anildep1
+    spec:
+      containers:
+      - image: dockerashu/ciscoashu:june292020v2
+        name: ciscoashu
+        env:
+        - name: web
+          value: 2
+        resources: {}
+status: {}

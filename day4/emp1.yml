@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: storagepod
+  name: storagepod
+spec:
+  volumes:
+  -name: anilvol1
+   emptyDir: {}
+  containers:
+  - image: alpine
+    name: storagepod
+    volumeMounts:
+    -name: anilvol1
+     mountPath: /mnt/cisco
+    command: ["/bin/bash","-c","while true; do date >>/mnt/cisco/time.txt;sleep 5;done"]
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
