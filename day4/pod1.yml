@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+ name: ashus1
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  namespace: ashus1   #  my private namespace 
+  creationTimestamp: null
+  labels:
+    run: ashup14  #  label of my pod
+  name: ashup14  # name of pod 
+spec:
+  containers:
+  - image: dockerashu/ciscoashu:june292020
+    name: ashup14
+    ports:
+    - containerPort: 80
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: s1
+ namespace: ashus1
+spec:
+ ports:
+ - name: okport
+   port: 1234
+   protocol: TCP
+   targetPort: 80
+ type: NodePort
+ selector:
+  run: ashup14

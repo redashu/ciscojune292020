@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: ashus1
+  name: ashus1   # name of the  service 
+spec:
+  ports:  # info about port 
+  - name: "1122"
+    port: 1122  #  port of  service IP  
+    protocol: TCP
+    targetPort: 80  #  same as application port  that we have written in dockerfile of application
+  selector:
+   run: ashuwebpod1  #  u must need to use  label of POD where your application is running 
+  type: NodePort  #  type  of  service  
+status:
+  loadBalancer: {}

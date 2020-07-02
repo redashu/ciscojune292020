@@ -1,0 +1,12 @@
+version: '3.8'  #  version of  compose file 
+services:
+ dbapp:  # name of  application 
+  image: alpine 
+  container_name: ashuc11
+  command: ping fb.com 
+
+ webapp:  #  name  of  application 2
+  image: nginx
+  container_name: ashuc22
+  ports:
+   - "1100:80"

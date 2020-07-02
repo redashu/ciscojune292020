@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+ name: ashusvc1
+
+spec:
+ selector:
+  run: ashuwebpod1   #  this label must match  pod lable 
+ type: NodePort  #  type of serivce 
+ ports:
+ - name: myport  
+   port:  1123  #  port number of serice  IP 
+   protocol: TCP
+   targetPort: 80  #  port of pod where we want send traffic
+
+

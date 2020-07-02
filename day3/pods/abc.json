@@ -1,0 +1,27 @@
+{
+    "kind": "Pod",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "podxxx1",
+        "creationTimestamp": null,
+        "labels": {
+            "run": "podxxx1"
+        }
+    },
+    "spec": {
+        "containers": [
+            {
+                "name": "podxxx1",
+                "image": "alpine",
+                "command": [
+                    "ping",
+                    "fb.com"
+                ],
+                "resources": {}
+            }
+        ],
+        "restartPolicy": "Always",
+        "dnsPolicy": "ClusterFirst"
+    },
+    "status": {}
+}

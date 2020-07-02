@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: ashuwebpod1  #  this is pod label 
+  name: ashuwebpod1
+spec:
+  containers:
+  - image: dockerashu/ciscoashu:june292020
+    name: ashuwebpod1
+    ports:
+    - containerPort: 80  #  continer port  
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: ashuss1
+  name: ashuss1
+spec:
+  ports:
+  - name: "2211"
+    port: 2211
+    protocol: TCP
+    targetPort: 80   #  must be  same as container port 
+  selector:
+    run: ashuwebpod1  #  matching  label same as pod 
+  type: NodePort
+status:
+  loadBalancer: {}

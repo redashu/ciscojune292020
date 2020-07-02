@@ -1,0 +1,5 @@
+FROM  httpd
+maintainer   ashutoshh@linux.com 
+WORKDIR   /var/www/html/
+ADD  webapp  .
+

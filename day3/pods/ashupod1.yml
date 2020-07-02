@@ -1,0 +1,8 @@
+apiVersion: v1   #  kube-apiversion for  pod management 
+kind: Pod   # type is Pod 
+metadata:
+ name: ashupod1    #  name of the POd  and its must be unique as of Now 
+spec:
+ containers:
+ - name: ashuc1   #  this  name u can give same 
+   image: nginx  #  docker image stored  on Docker hub 
