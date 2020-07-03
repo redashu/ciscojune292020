@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: example-ingress
+spec:
+  rules:
+  - host: ciscoindia.ashutoshh.in
+    http:
+      paths:
+        - path: /
+          backend:
+            serviceName: ashung1   #  service of ClusterIP  type 
+            servicePort: 80  # svc port 

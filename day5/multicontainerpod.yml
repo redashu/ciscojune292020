@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: ashupod5
+  name: ashupod5
+  namespace: ashu   #  my namespace  namespce  must be existing  it is not going  to create 
+spec:
+  volumes:   #  can crete no of volumes
+  - name: ashuvol1   #  first volume 
+    emptyDir: {}   #  it  is going to take space and location from worker node where pod will be scheduled 
+  containers:
+  - image: nginx  #  docker hub image
+    name: ashuwebc11   #  name of container 
+    ports:  # optional field 
+    - containerPort: 80  #  container port  for application
+    volumeMounts:
+    - name: ashuvol1 #  volume created above 
+      mountPath: /usr/share/nginx/html/  # document root  of web server  
+  - image: alpine   # helper  container  information 
+    name: ashupod5
+    volumeMounts:
+    - name: ashuvol1  # name of volume 
+      mountPath:  /mnt/ciscodata  #  this location will be created when pod will created inside container
+    command: ["/bin/sh","-c","while true; do  date  >>/mnt/ciscodata/index.html;sleep 10;done"]   
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}

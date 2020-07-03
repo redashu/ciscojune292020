@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: ashudb
+  name: ashudb
+  namespace: ashu  #  using my existing  namespce 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ashudb
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: ashudb
+    spec:
+      volumes: 
+      - name: ashuvoldb1   #  creating  volume  
+        nfs:  #  taking  remote storage
+         server: 172.31.48.167  #  nfs server  IP 
+         path: /data/ec2-user  #  nfs  server  location 
+      containers:
+      - image: mysql
+        name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD  #  this env  variable is already present  in docker  image
+          valueFrom:
+           secretKeyRef:
+            name: ashudb  #  name of secret 
+            key: sqlp   # key of secret
+        ports:
+        - containerPort: 3306
+        volumeMounts:
+        - name: ashuvoldb1
+          mountPath: /var/lib/mysql  #  default location of  mysql db 
+
+        resources: {}
+status: {}
